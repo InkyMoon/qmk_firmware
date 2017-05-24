@@ -31,7 +31,10 @@ enum planck_keycodes {
   LOWER,
   RAISE,
   BACKLIT,
-  ZELDA
+  ZELDA,
+  EARTH,
+  SSB64,
+  UNDER
 };
 
 // Fillers to make layering more clear
@@ -43,6 +46,121 @@ enum planck_keycodes {
     H__NOTE(_G6 ),  \
     E__NOTE(_FS6),  \
     H__NOTE(_E6 ),
+    
+#define EARTHBOUND_LEVEL \
+    H__NOTE(_DS7),  \
+    H__NOTE(_AS7),  \
+    H__NOTE(_G6 ),  \
+    H__NOTE(_DS7),  \
+    H__NOTE(_AS7),  \
+    H__NOTE(_G6 ),  \
+    H__NOTE(_DS7),  \
+    H__NOTE(_AS7),  \
+    H__NOTE(_GS6),  \
+    H__NOTE(_DS7),  \
+    H__NOTE(_AS7),  \
+    H__NOTE(_GS6),
+    
+#define DREAMLAND \
+    Q__NOTE(_C7  ),	\
+    Q__NOTE(_REST),	\
+    Q__NOTE(_C6  ),	\
+    Q__NOTE(_REST),	\
+    Q__NOTE(_DS6 ),	\
+    Q__NOTE(_D6  ),	\
+    Q__NOTE(_C6  ),	\
+    Q__NOTE(_REST),	\
+    Q__NOTE(_C6  ),	\
+    Q__NOTE(_D6  ),	\
+    Q__NOTE(_DS6 ),	\
+    Q__NOTE(_C6  ),	\
+    Q__NOTE(_AS5 ),	\
+    Q__NOTE(_C6  ),	\
+    Q__NOTE(_G5  ),	\
+    Q__NOTE(_REST),	\
+    Q__NOTE(_C7  ),	\
+    Q__NOTE(_REST),	\
+    Q__NOTE(_G6  ),	\
+    Q__NOTE(_REST),	\
+    Q__NOTE(_DS6 ),	\
+    Q__NOTE(_D6  ),	\
+    Q__NOTE(_C6  ),	\
+    E__NOTE(_C6  ),	\
+    E__NOTE(_D6  ),	\
+    Q__NOTE(_DS6 ),	\
+    Q__NOTE(_F6  ),	\
+    Q__NOTE(_D6  ),	\
+    Q__NOTE(_AS5 ),	\
+    Q__NOTE(_C6  ),	\
+    Q__NOTE(_G5  ),	\
+    Q__NOTE(_C6  ),
+    
+#define MEGALOVANIA \
+    E__NOTE(_G5  ),  \
+    Q__NOTE(_REST),  \
+    E__NOTE(_AS5 ),  \
+    Q__NOTE(_REST),  \
+    E__NOTE(_C6  ),  \
+    Q__NOTE(_REST),  \
+    E__NOTE(_G5  ),  \
+    Q__NOTE(_REST),  \
+    E__NOTE(_AS5 ),  \
+    Q__NOTE(_REST),  \
+    SD_NOTE(_REST),  \
+    E__NOTE(_C6  ),  \
+    S__NOTE(_REST),  \
+    Q__NOTE(_CS6 ),  \
+    E__NOTE(_REST),  \
+    E__NOTE(_D6  ),  \
+    H__NOTE(_F6  ),  \
+    E__NOTE(_G5  ),  \
+    Q__NOTE(_REST),  \
+    E__NOTE(_AS5 ),  \
+    Q__NOTE(_REST),  \
+    E__NOTE(_C6  ),  \
+    Q__NOTE(_REST),  \
+    E__NOTE(_G5  ),  \
+    Q__NOTE(_REST),  \
+    E__NOTE(_AS5 ),  \
+    Q__NOTE(_REST),  \
+    SD_NOTE(_REST),  \
+    E__NOTE(_C6  ),  \
+    S__NOTE(_REST),  \
+    Q__NOTE(_CS6 ),  \
+    E__NOTE(_REST),  \
+    E__NOTE(_D6  ),  \
+    H__NOTE(_F6  ),  \
+    E__NOTE(_G5  ),  \
+    Q__NOTE(_REST),  \
+    E__NOTE(_AS5 ),  \
+    Q__NOTE(_REST),  \
+    E__NOTE(_C6  ),  \
+    Q__NOTE(_REST),  \
+    E__NOTE(_G5  ),  \
+    Q__NOTE(_REST),  \
+    E__NOTE(_AS5 ),  \
+    Q__NOTE(_REST),  \
+    SD_NOTE(_REST),  \
+    E__NOTE(_C6  ),  \
+    S__NOTE(_REST),  \
+    Q__NOTE(_CS6 ),  \
+    E__NOTE(_REST),  \
+    E__NOTE(_D6  ),  \
+    H__NOTE(_F6  ),  \
+    E__NOTE(_G5  ),  \
+    Q__NOTE(_REST),  \
+    E__NOTE(_AS5 ),  \
+    Q__NOTE(_REST),  \
+    E__NOTE(_C6  ),  \
+    Q__NOTE(_REST),  \
+    E__NOTE(_G5  ),  \
+    Q__NOTE(_REST),  \
+    E__NOTE(_F5  ),  \
+    S__NOTE(_REST),  \
+    E__NOTE(_FS5 ),  \
+    Q__NOTE(_REST),  \
+    SD_NOTE(_REST),  \
+    H__NOTE(_G5  ),
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -137,9 +255,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Adjust (Lower + Raise) 
  * ,-----------------------------------------------------------------------------------.
- * |      | Reset|Zelda |      |      |      |      |      |      |      |      |      |
+ * |      | Reset|Zelda |Earth |SSB64 |Under |      |      |      |      |      |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |      |      |Aud on|Audoff|AGnorm|AGswap|Qwerty|Colemk|Numpad|      |      |
+ * |      |      |      |Aud on|Audoff|      |      |Qwerty|Colemk|Numpad|      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |Voice-|Voice+|Mus on|Musoff|MIDIon|MIDIof|      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -147,7 +265,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = {
-  {_______, RESET,   ZELDA,   _______, _______, _______, _______, _______, _______, _______, _______, _______},
+  {_______, RESET,   ZELDA,   EARTH,   SSB64,   UNDER,   _______, _______, _______, _______, _______, _______},
   {_______, _______, _______, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  COLEMAK, NUMPAD,  _______, _______},
   {_______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
@@ -164,6 +282,9 @@ float tone_numpad[][2]      = SONG(NUMPAD_SOUND);
 float music_scale[][2]      = SONG(MUSIC_SCALE_SOUND);
 float tone_goodbye[][2]     = SONG(GOODBYE_SOUND);
 float zelda_puzzle[][2]     = SONG(ZELDA_PUZZLE);
+float earth_level[][2]      = SONG(EARTHBOUND_LEVEL);
+float dreamland_theme[][2]  = SONG(DREAMLAND);
+float megalovania_int[][2]  = SONG(MEGALOVANIA);
 #endif
 
 
@@ -242,6 +363,32 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         #ifdef AUDIO_ENABLE
           PLAY_NOTE_ARRAY(zelda_puzzle, false, 0);
+        #endif
+      }
+      return false;
+      break;
+    case EARTH:
+      if (record->event.pressed) {
+        #ifdef AUDIO_ENABLE
+          PLAY_NOTE_ARRAY(earth_level, false, 0);
+        #endif
+      }
+      return false;
+      break;
+    case SSB64:
+      if (record->event.pressed) {
+        #ifdef AUDIO_ENABLE
+          PLAY_NOTE_ARRAY(dreamland_theme, false, 0);
+        #endif
+      }
+      return false;
+      break;
+    case UNDER:
+      if (record->event.pressed) {
+        #ifdef AUDIO_ENABLE
+          increase_tempo(100);
+          PLAY_NOTE_ARRAY(megalovania_int, false, 0);
+          decrease_tempo(100);
         #endif
       }
       return false;
