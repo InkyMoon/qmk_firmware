@@ -30,7 +30,8 @@ enum planck_keycodes {
   NUMPAD,
   LOWER,
   RAISE,
-  BACKLIT
+  BACKLIT,
+  ZELDA
 };
 
 // Fillers to make layering more clear
@@ -87,15 +88,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |      |      |      |      |      |   *  |   /  |   4  |   5  |   6  |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |      |      |      |      |   =  |   0  |   1  |   2  |   3  |      |
+ * |      |      |      |      |      |      |      |   0  |   1  |   2  |   3  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_NUMPAD] = {
-  {_______, _______, _______, _______, _______, _______, KC_PPLS, KC_PMNS, KC_P7,   KC_P8,   KC_P9,   KC_PSLS},
-  {_______, _______, _______, _______, _______, _______, KC_PAST, KC_PSLS, KC_P4,   KC_P5,   KC_P6,   KC_PAST},
-  {_______, _______, _______, _______, _______, _______, KC_PEQL, KC_P0,   KC_P1,   KC_P2,   KC_P3,   KC_PMNS},
+  {_______, _______, _______, _______, _______, _______, KC_PPLS, KC_PMNS, KC_P7,   KC_P8,   KC_P9,   _______},
+  {_______, _______, _______, _______, _______, _______, KC_PAST, KC_PSLS, KC_P4,   KC_P5,   KC_P6,   _______},
+  {_______, _______, _______, _______, _______, _______, _______, KC_P0,   KC_P1,   KC_P2,   KC_P3,   _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
 /* Lower
@@ -136,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Adjust (Lower + Raise) 
  * ,-----------------------------------------------------------------------------------.
- * |      | Reset|      |      |      |      |      |      |      |      |      |      |
+ * |      | Reset|Zelda |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |      |      |Aud on|Audoff|AGnorm|AGswap|Qwerty|Colemk|Numpad|      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
@@ -146,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = {
-  {_______, RESET,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______},
+  {_______, RESET,   ZELDA,   _______, _______, _______, _______, _______, _______, _______, _______, _______},
   {_______, _______, _______, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  COLEMAK, NUMPAD,  _______, _______},
   {_______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
@@ -162,6 +163,7 @@ float tone_colemak[][2]     = SONG(COLEMAK_SOUND);
 float tone_numpad[][2]      = SONG(NUMPAD_SOUND);
 float music_scale[][2]      = SONG(MUSIC_SCALE_SOUND);
 float tone_goodbye[][2]     = SONG(GOODBYE_SOUND);
+float zelda_puzzle[][2]     = SONG(ZELDA_PUZZLE);
 #endif
 
 
@@ -233,6 +235,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         #endif
       } else {
         unregister_code(KC_RSFT);
+      }
+      return false;
+      break;
+    case ZELDA:
+      if (record->event.pressed) {
+        #ifdef AUDIO_ENABLE
+          PLAY_NOTE_ARRAY(zelda_puzzle, false, 0);
+        #endif
       }
       return false;
       break;
